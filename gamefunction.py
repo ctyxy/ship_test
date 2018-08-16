@@ -2,7 +2,7 @@ import sys
 from time import ctime
 import pygame
 from bullet import Bullet
-
+from alien import Alien
 def time_update():
     return ctime()
 
@@ -34,16 +34,29 @@ def check_key(setting,screen,ship,bullets):
             check_key_up(ship,event)
 
 
-def update_screen(screen,setting,ship,bullets):
+def update_screen(screen,setting,ship,bullets,aliens):
     screen.fill(setting.screen_bg_color)
     ship.biltme()
+    aliens.draw(screen)
     for bullet in bullets:
         bullet.darw_bullet()
     pygame.display.flip()
 
 def update_bullets(bullets):
+
     bullets.update()
 
     for bullet in bullets.copy():
         if bullet.rect.bottom<=0:
             bullets.remove(bullet)
+
+def alien_fleet(screen,setting,aliens):
+    alien=Alien(screen,setting)
+    alien_width=alien.rect.width
+    avail_space_x=setting.screen_width-3*alien_width
+    alien_num_x=int(setting.screen_width/alien_width)
+    for alien_n in range(alien_num_x):
+        alien=Alien(screen,setting)
+        alien.x=alien_width+2*alien_width*alien_n
+        alien.rect.x=alien.x
+        aliens.add(alien)
