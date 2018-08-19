@@ -17,7 +17,7 @@ def run_game():
     bullets=Group()
     aliens=Group()
 
-    gamefunction.alien_fleet(screen,setting,aliens)
+    gamefunction.alien_fleet_creat(screen,setting,ship.rect.height,aliens)
     while True:
         # for event in pygame.event.get():
         #     if event.type == pygame.QUIT:
@@ -25,6 +25,7 @@ def run_game():
         gamefunction.check_key(setting,screen,ship,bullets)
         ship.update()
         gamefunction.update_bullets(bullets)
+        gamefunction.update_aliens(aliens)
         gamefunction.update_screen(screen,setting,ship,bullets,aliens)
 
 run_game()
