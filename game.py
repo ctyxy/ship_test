@@ -3,7 +3,6 @@ import pygame
 import gamefunction
 from setting import Setting
 from ship import Ship
-from alien import Alien
 from pygame.sprite import Group
 
 def run_game():
@@ -24,8 +23,8 @@ def run_game():
         #         sys.exit()
         gamefunction.check_key(setting,screen,ship,bullets)
         ship.update()
-        gamefunction.update_bullets(bullets)
-        gamefunction.update_aliens(aliens)
+        gamefunction.update_bullets(screen,setting,ship.rect.height,bullets,aliens)
+        gamefunction.update_aliens(setting,ship,aliens)
         gamefunction.update_screen(screen,setting,ship,bullets,aliens)
 
 run_game()
