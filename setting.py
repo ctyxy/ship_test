@@ -6,6 +6,7 @@ class Setting():
         self.screen_bg_color=(230,230,230)
         #ship setting
         self.ship_speed=1
+        self.ship_limit=3
 
         #bullet setting
         self.bullet_width=3000
@@ -16,5 +17,5 @@ class Setting():
         #alien setting
         self.alien_speed_X=1
         self.alien_move_director=1
-        self.alien_speed_Y=10
+        self.alien_speed_Y=100
 
