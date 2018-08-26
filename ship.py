@@ -30,3 +30,5 @@ class Ship():
 
     def center_ship(self):
         self.rect.x=self.screen_rect.centerx
+    
+    

@@ -42,12 +42,13 @@ def check_play_button(setting,stats,play_button,mouse_x,mouse_y):
 
 
 
-def update_screen(screen,setting,stats,ship,bullets,aliens,play_button,scoreB):
+def update_screen(screen,setting,stats,ship,bullets,aliens,play_button,scoreB,high_score):
 
     screen.fill(setting.screen_bg_color)
     ship.biltme()
     aliens.draw(screen)
     scoreB.show()
+    high_score.high_show()
     for bullet in bullets:
         bullet.darw_bullet()
     if not stats.game_active:
@@ -100,6 +101,8 @@ def ship_hit(screen,setting,stats,ship,bullets,aliens):
         sleep(0.5)
 
     else:
+        if stats.score>stats.highest_score:
+            stats.highest_score=stats.score
         stats.game_active=False
 
 def check_fleet_edge(setting,aliens):

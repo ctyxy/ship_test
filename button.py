@@ -1,5 +1,6 @@
 import pygame.ftfont
-
+from ship import Ship
+from pygame.sprite import  Group
 class Button():
 
     def __init__(self,screen,setting,msg):
@@ -37,6 +38,7 @@ class ScoreBoard():
         self.font=pygame.ftfont.SysFont(None,48)
 
         self.prep_score()
+     
 
     def prep_score(self):
         score_str=str(self.stats.score)
@@ -45,7 +47,34 @@ class ScoreBoard():
         self.score_rect=self.score_image.get_rect()
         self.score_rect.right=self.screen_rect.right-20
         self.score_rect.top=20
-
+    
+    
     def show(self):
         self.prep_score()
         self.screen.blit(self.score_image,self.score_rect)
+    
+    
+    
+class HighScore():
+    def __init__(self,screen,setting,stats):
+        self.screen=screen
+        self.setting=setting
+        self.screen_rect=screen.get_rect()
+        self.stats=stats
+
+        self.text_color = (20, 30, 30)
+        self.font = pygame.ftfont.SysFont(None, 48)
+
+        self.prep_h_score()
+
+    def prep_h_score(self):
+        score_str = str(self.stats.highest_score)
+        self.score_image = self.font.render(score_str, True, self.text_color, self.setting.screen_bg_color)
+    
+        self.score_rect = self.score_image.get_rect()
+        self.score_rect.center= self.screen_rect.center
+        self.score_rect.top = 20
+
+    def high_show(self):
+        self.prep_h_score()
+        self.screen.blit(self.score_image, self.score_rect)

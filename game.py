@@ -5,7 +5,7 @@ from setting import Setting
 from ship import Ship
 from pygame.sprite import Group
 from gamestats import Gamestats
-from button import Button,ScoreBoard
+from button import Button,ScoreBoard,HighScore
 
 def run_game():
     pygame.init()
@@ -20,6 +20,7 @@ def run_game():
     aliens=Group()
     stats=Gamestats(setting)
     scoreB=ScoreBoard(screen,setting,stats)
+    high_score = HighScore(screen, setting, stats)
     gamefunction.alien_fleet_creat(screen,setting,ship,aliens)
     while True:
         # for event in pygame.event.get():
@@ -33,6 +34,6 @@ def run_game():
             gamefunction.update_bullets(screen,setting,ship,bullets,aliens,stats,scoreB)
             gamefunction.update_aliens(screen, setting, stats, ship, bullets, aliens)
 
-        gamefunction.update_screen(screen,setting,stats,ship,bullets,aliens,play_button,scoreB)
+        gamefunction.update_screen(screen,setting,stats,ship,bullets,aliens,play_button,scoreB,high_score)
 
 run_game()
