@@ -5,7 +5,8 @@ class Gamestats():
         self.game_active=False
         self.score=0
         self.highest_score=0
-        
+        self.ships_left=3
+    
     def reset_stats(self):
         self.ships_left=self.setting.ship_limit
         self.score=0

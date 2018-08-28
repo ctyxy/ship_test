@@ -39,6 +39,7 @@ def check_play_button(setting,stats,play_button,mouse_x,mouse_y):
         stats.game_active=True
         stats.reset_stats()
         setting.init_game_setting()
+        
 
 
 
@@ -73,29 +74,29 @@ def check_bullets_aliens_coll(screen,setting,ship_height,bullets,aliens,stats,sc
         setting.increase_speed()
         alien_fleet_creat(screen,setting,ship_height,aliens)
 
-def update_aliens(screen, setting, stats, ship, bullets, aliens):
+def update_aliens(screen, setting, stats, sb,ship, bullets, aliens):
     check_fleet_edge(setting,aliens)
     aliens.update()
-    check_ship_aliens(screen, setting, stats, ship, bullets, aliens)
-    check_aliens_screen_bottom(screen, setting, stats, ship, bullets, aliens)
+    check_ship_aliens(screen, setting, stats, sb,ship, bullets, aliens)
+    check_aliens_screen_bottom(screen, setting, stats, sb,ship, bullets, aliens)
 
-def check_ship_aliens(screen, setting, stats, ship, bullets, aliens):
+def check_ship_aliens(screen, setting, stats, sb,ship, bullets, aliens):
     if pygame.sprite.spritecollideany(ship,aliens):
-        ship_hit(screen, setting, stats, ship, bullets, aliens)
+        ship_hit(screen, setting, stats, sb,ship, bullets, aliens)
 
-def check_aliens_screen_bottom(screen, setting, stats, ship, bullets, aliens):
+def check_aliens_screen_bottom(screen, setting, stats, sb,ship, bullets, aliens):
     screen_rect=screen.get_rect()
     for alien in aliens.sprites():
         if alien.rect.bottom>=screen_rect.bottom:
-            ship_hit(screen, setting, stats, ship, bullets, aliens)
+            ship_hit(screen, setting, stats, sb,ship, bullets, aliens)
             break
 
-def ship_hit(screen,setting,stats,ship,bullets,aliens):
+def ship_hit(screen,setting,stats,sb,ship,bullets,aliens):
     if stats.ships_left>0:
         stats.ships_left-=1
         aliens.empty()
         bullets.empty()
-
+        sb.prep_ship()
         alien_fleet_creat(screen, setting, ship, aliens)
 
         sleep(0.5)
@@ -132,7 +133,7 @@ def alien_creat(screen,setting,aliens,aliens_num,number_aliens_y):
     alien_width=alien.rect.width
     alien.x=alien_width+2*alien_width*aliens_num
     alien.rect.x=alien.x
-    alien.rect.y=alien.rect.height+2*alien.rect.height*number_aliens_y
+    alien.rect.y=alien.rect.height+2*alien.rect.height*number_aliens_y+10
     aliens.add(alien)
 
 def alien_fleet_creat(screen,setting,ship,aliens):

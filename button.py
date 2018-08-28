@@ -38,7 +38,7 @@ class ScoreBoard():
         self.font=pygame.ftfont.SysFont(None,48)
 
         self.prep_score()
-     
+        self.prep_ship()
 
     def prep_score(self):
         score_str=str(self.stats.score)
@@ -48,10 +48,20 @@ class ScoreBoard():
         self.score_rect.right=self.screen_rect.right-20
         self.score_rect.top=20
     
+    def prep_ship(self):
+        self.ships=Group()
+        for ship_number in range(self.stats.ships_left):
+            ship=Ship(self.screen,self.setting)
+            ship.rect.x=10+ship_number*ship.rect.width
+            ship.rect.y=10
+            self.ships.add(ship)
+            
     
     def show(self):
         self.prep_score()
+        self.prep_ship()
         self.screen.blit(self.score_image,self.score_rect)
+        self.ships.draw(self.screen)
     
     
     
